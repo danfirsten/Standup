@@ -6,6 +6,7 @@ Build a persistent AI mentor web application per the PRD specifications:
 - **Backend**: Node.js API with TypeScript
 - **Database/Auth**: Supabase (Postgres + Auth)
 - **AI**: OpenAI API integration
+- **Deployment**: Open source, self-hosted (users provide their own Supabase + OpenAI credentials)
 
 ---
 
@@ -22,11 +23,13 @@ Set up the complete project structure, development environment, and core infrast
 - Set up path aliases (`@/components`, `@/lib`, etc.)
 - Create `.env.local` template with required environment variables
 
-#### 1.2 Configure Supabase
-- Set up Supabase client library
-- Create database schema with migrations:
+#### 1.2 Configure Supabase Client & Provide Setup Instructions
+- Set up Supabase client library for users to connect to their own instance
+- Create SQL migration files in `/supabase/migrations/` for users to run
+- Provide clear setup documentation in README
+- Database schema (users will create in their own Supabase project):
   ```
-  users (extends Supabase auth.users)
+  profiles (extends Supabase auth.users)
     - id, role, level, company_type, timezone, created_at, updated_at
 
   sessions (conversations)
@@ -46,8 +49,8 @@ Set up the complete project structure, development environment, and core infrast
     - id, user_id, artifact_id, description, time_horizon,
       status (not_started/in_progress/done/dropped), created_at, updated_at
   ```
-- Configure Row Level Security (RLS) policies for user isolation
-- Set up Supabase Auth with email/password and magic link
+- Include Row Level Security (RLS) policies in migrations for user data isolation
+- Document Supabase Auth setup (email/password and magic link)
 
 #### 1.3 Project Structure
 ```
@@ -78,8 +81,9 @@ Set up the complete project structure, development environment, and core infrast
 - Layout components: AppShell, Sidebar, Header
 
 ### Deliverables
-- Runnable Next.js application with auth flow
-- Database schema deployed to Supabase
+- Runnable Next.js application with placeholder pages
+- SQL migration files for database setup
+- README with setup instructions (Supabase project creation, environment variables)
 - Basic navigation between placeholder pages
 
 ---
